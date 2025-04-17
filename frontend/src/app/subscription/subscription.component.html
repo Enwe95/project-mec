@@ -1,0 +1,68 @@
+<div class="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg mt-6">
+  <h2 class="text-2xl font-bold text-blue-800 mb-4 text-center">Inscription Membre</h2>
+
+  <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+    <!-- Prénom -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Prénom *</label>
+      <input formControlName="firstName" class="form-input" />
+      <div *ngIf="f.firstName.touched && f.firstName.invalid" class="text-red-500 text-sm">Prénom requis.</div>
+    </div>
+
+    <!-- Nom -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Nom *</label>
+      <input formControlName="lastName" class="form-input" />
+      <div *ngIf="f.lastName.touched && f.lastName.invalid" class="text-red-500 text-sm">Nom requis.</div>
+    </div>
+
+    <!-- Date de naissance -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Date de naissance *</label>
+      <input type="date" formControlName="birthDate" class="form-input" />
+      <div *ngIf="f.birthDate.touched && f.birthDate.invalid" class="text-red-500 text-sm">Date de naissance requise.</div>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Email *</label>
+      <input formControlName="email" type="email" class="form-input" />
+      <div *ngIf="f.email.touched && f.email.errors?.['required']" class="text-red-500 text-sm">Email requis.</div>
+      <div *ngIf="f.email.touched && f.email.errors?.['email']" class="text-red-500 text-sm">Email invalide.</div>
+    </div>
+
+    <!-- Téléphone -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Téléphone *</label>
+      <input formControlName="phone" class="form-input" />
+      <div *ngIf="f.phone.touched && f.phone.errors?.['required']" class="text-red-500 text-sm">Téléphone requis.</div>
+      <div *ngIf="f.phone.touched && f.phone.errors?.['pattern']" class="text-red-500 text-sm">Format invalide (10 à 15 chiffres).</div>
+    </div>
+
+    <!-- Mot de passe -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Mot de passe *</label>
+      <input type="password" formControlName="password" class="form-input" />
+      <div *ngIf="f.password.touched && f.password.errors?.['required']" class="text-red-500 text-sm">Mot de passe requis.</div>
+      <div *ngIf="f.password.touched && f.password.errors?.['minlength']" class="text-red-500 text-sm">Au moins 6 caractères.</div>
+    </div>
+
+    <!-- Confirmation -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700">Confirmer le mot de passe *</label>
+      <input type="password" formControlName="confirmPassword" class="form-input" />
+      <div *ngIf="subscriptionForm.errors?.['passwordsMismatch'] && f.confirmPassword.touched" class="text-red-500 text-sm">
+        Les mots de passe ne correspondent pas.
+      </div>
+    </div>
+
+    <!-- Bouton -->
+    <div class="text-center pt-4">
+      <button type="submit" [disabled]="subscriptionForm.invalid"
+              class="bg-blue-800 text-white font-bold py-2 px-6 rounded hover:bg-blue-700">
+        S'inscrire
+      </button>
+    </div>
+  </form>
+</div>
