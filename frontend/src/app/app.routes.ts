@@ -5,6 +5,7 @@ import { FinancesComponent } from './finances/finances.component';
 import { HomeComponent } from './home/home.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { LoginComponent } from './login/login.component';
+import { LoginGuard } from './guards/login.guard';
 
 /*export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -14,11 +15,16 @@ import { LoginComponent } from './login/login.component';
 ];*/
 
 export const routes: Routes = [
- // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
  // { path: '**', redirectTo: 'home'},
   { path: 'home', component: HomeComponent},
 
   { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [LoginGuard], // ⛔️ Bloque si déjà connecté
+  },
   { path: 'finances', component: FinancesComponent },
   { path: 'subscription', component: SubscriptionComponent },
 ];

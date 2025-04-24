@@ -1,30 +1,47 @@
+<div class="min-h-screen flex items-center justify-center bg-blue-50">
+  <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-blue-800 mb-6">
+      Connexion à MEC
+    </h2>
 
-    <!-- Content Placeholder -->
-    <main class="flex-grow flex items-center justify-center text-white text-center p-8">
-        <div class="bg-blue-900 bg-opacity-60 p-8 rounded-xl shadow-xl max-w-2xl">
-          <h1 class="text-3xl md:text-4xl font-bold mb-4">Connexion</h1>
-          <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
-      <!-- Email -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1"required="true">Adresse électronique</label>
-        <input type="email" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-  
-      <!-- MDP -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1" required="true">Mot de passe</label>
-        <input type="password" required class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-
-      <!-- Bouton de soumission -->
-      <div class="md:col-span-2 text-center mt-4">
-        <button type="submit" class="bg-blue-800 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Se connecter</button>
-      </div>
-
-    </form>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+          placeholder="exemple@domaine.com"
+        />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-red-500 text-sm">
+          Email valide requis
         </div>
-    </main>
-    
-  
-    
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Mot de passe</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300"
+          placeholder="********"
+        />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-500 text-sm">
+          Mot de passe requis
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full bg-blue-800 text-white py-2 rounded hover:bg-blue-900 transition"
+        [disabled]="loginForm.invalid"
+      >
+        Se connecter
+      </button>
+
+      <div class="text-center mt-4">
+        <a href="#" class="text-blue-700 text-sm hover:underline">Mot de passe oublié ?</a>
+      </div>
+    </form>
+  </div>
+</div>
