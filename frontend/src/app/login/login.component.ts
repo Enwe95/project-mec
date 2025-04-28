@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule , Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder, 
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,18 +30,19 @@ export class LoginComponent {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-
-      // Ici tu feras un appel à ton service d'authentification
-      console.log('Tentative de connexion pour :', email);
-
-      // Simulation d'un succès de login
-      // À remplacer par appel API (et gestion des erreurs)
-      setTimeout(() => {
-        console.log('Connexion réussie ✅');
-        this.router.navigate(['/home']); // ou `/home`, `/profil`, etc.
-      }, 1000);
+  
+      this.authService.login(email, password).subscribe({
+        next: () => {
+          this.router.navigate(['/dashboard']);
+        },
+        error: err => {
+          console.error('Erreur login', err);
+          // Afficher un message à l'utilisateur si besoin
+        }
+      });
     }
   }
+  
 
 
 }

@@ -1,3 +1,13 @@
+<h2 align="center">
+  MEC<br/>
+</h2>
+
+<div align="center">
+  <img alt="Demo" src="public\assets\images\imageHome.png" />
+</div>
+
+<br/>
+
 # Mec
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.

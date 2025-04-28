@@ -14,5 +14,5 @@ public class User {
     private String telephone;
     private String email;
     private String mdp;
-    private Set<RoleEntity> roles;
+    private Set<Role> roles;
 }
